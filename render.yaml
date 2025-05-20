@@ -1,0 +1,7 @@
+
+services:
+  - type: web
+    name: generateur-mdp
+    env: python
+    buildCommand: ""
+    startCommand: "python app.py"
