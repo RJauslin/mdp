@@ -13,11 +13,11 @@ def evaluate_password(password):
     has_symbols = any(c in string.punctuation for c in password)
 
     if length >= 12 and has_letters and has_digits and has_symbols:
-        return "Fort", "green"
+        return "Strong", "green"
     elif length >= 8 and ((has_letters and has_digits) or (has_letters and has_symbols) or (has_digits and has_symbols)):
-        return "Moyen", "orange"
+        return "Medium", "orange"
     else:
-        return "Faible", "red"
+        return "Weak", "red"
 
 def generate_password(length, seed_value, include_letters, include_digits, include_symbols):
     caracteres = ""
@@ -43,7 +43,7 @@ html = """
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title>Générateur de mot de passe</title>
+    <title>Password generator</title>
     <style>
       body { font-family: Arial, sans-serif; margin: 20px; }
       .container { max-width: 600px; margin: auto; }
@@ -52,31 +52,31 @@ html = """
   </head>
   <body>
     <div class="container">
-      <h1>🔐 Générateur de mot de passe</h1>
+      <h1>🔐 Password generator</h1>
       <form method="post">
-        <label for="length">Longueur du mot de passe :</label>
+        <label for="length">Password length :</label>
         <input type="number" id="length" name="length" value="12" required><br><br>
         
-        <label for="seed">Seed (optionnelle) :</label>
+        <label for="seed">Seed (optional) :</label>
         <input type="text" id="seed" name="seed"><br><br>
         
         <input type="checkbox" id="letters" name="letters" checked>
-        <label for="letters">Inclure les lettres</label><br>
+        <label for="letters">Include letters</label><br>
         
         <input type="checkbox" id="digits" name="digits" checked>
-        <label for="digits">Inclure les chiffres</label><br>
+        <label for="digits">Include numbers</label><br>
         
         <input type="checkbox" id="symbols" name="symbols">
-        <label for="symbols">Inclure les symboles</label><br><br>
+        <label for="symbols">Include symbols</label><br><br>
         
-        <button type="submit">Générer</button>
+        <button type="submit">Generate</button>
       </form>
       
       {% if password %}
       <div class="result">
-        <h2>Mot de passe généré :</h2>
+        <h2>Password generated :</h2>
         <input type="text" value="{{ password }}" readonly style="width: 100%;"><br><br>
-        <p style="color: {{ color }}">🔒 Sécurité du mot de passe : {{ level }}</p>
+        <p style="color: {{ color }}">🔒 Password level : {{ level }}</p>
       </div>
       {% endif %}
     </div>
